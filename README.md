@@ -50,3 +50,5 @@ cd developer
     git push -u origin main
 
     * Quando temos um ponto importante no codigo sempre realizaremos um Git Commit e daremos um Push para o github - tendo assim uma marca histórica como se fosse um checkpoint para a proxima fase.
+
+    !Um ponto muito importante é usar o GitIgnore para ignorar a pasta VENV para nao subir para o repositório
