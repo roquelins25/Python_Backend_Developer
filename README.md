@@ -6,7 +6,7 @@ Vem com a intenção de aprender e registrar todos os comando necessarios para u
 ## Instalação
 Passos para instalar:
 ```bash
-git clone https://github.com/roquelins25/Python-Backend-Developer.git
+git clone https://github.com/roquelins25/Python_Backend_Developer.git
 cd developer
 
 ### Alguns Comandos quando cria novo arquivos
