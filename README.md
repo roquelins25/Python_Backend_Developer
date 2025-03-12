@@ -52,3 +52,18 @@ cd developer
     * Quando temos um ponto importante no codigo sempre realizaremos um Git Commit e daremos um Push para o github - tendo assim uma marca histórica como se fosse um checkpoint para a proxima fase.
 
     !Um ponto muito importante é usar o GitIgnore para ignorar a pasta VENV para nao subir para o repositório
+
+
+#### Algumas Boas Praticas em Python ####
+    Existe um documento PEP8 para seguir um modulo padrão
+    Quatro espaços para identação
+    limitar linhas a 79 caracteres
+    usar nome de variaveis em snake_case #Ex: total_faturado
+    CamelCase para Classes #Ex: ContaBancaria
+Para Ajudar a Arrumar o Codigo e manter no padrão é possivel usar ferramentas que ajuda com o formação
+    Biblioteca flak8 # pip install flak8
+        Para executar é somente digitar o codigo ==>  flak8 "Nome do Arquivo"
+    Biblioteca black # pip install black
+        Para executar é somente digitar o codigo ==> black "Nome do Arquivo"
+    Biblioteca isort # pip install black
+        Para executar é somente digitar o codigo ==> isort "Nome do Arquivo"
