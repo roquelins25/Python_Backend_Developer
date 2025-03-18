@@ -67,3 +67,72 @@ Para Ajudar a Arrumar o Codigo e manter no padrão é possivel usar ferramentas 
         Para executar é somente digitar o codigo ==> black "Nome do Arquivo"
     Biblioteca isort # pip install black
         Para executar é somente digitar o codigo ==> isort "Nome do Arquivo"
+
+### Banco de Dados com Python ###
+Toda tabela tem que ter PK ( Chave Primaria )
+1. Existe 2 tipos de chaves - Chave Estrangeira e Chave Primarias
+    A Chave Primarias são os IDs que nao pode se repetir ( unicos registros )
+    A chave Estrangerias são IDs das chaves primarias de outras tabelas para fazer possiveis Relacionamentos.
+
+2. Tipo Relacionamentos
+    um para muitos = relacionamento de um para muitos pode ser dizer que é um relacionamento mais comum. Exemplo: UM cliente pode fazer MUITOS Pedidos
+    um para um = relacionamento de um para um pode se dizer que é um relacionamento que tem somente 1 registro, Exemplo: UM cliente tem somente UM documento
+    Muito para Muitos = Relacionamentos de muito para muitos usa-se para saber mais de uma informação para relacionar.
+
+3. SQL ( Structured Query Language )
+    Linguaguem utilizado para realizar as criações, modificações, consultas, funções dentro de um banco de dados.
+    Segue alguns SQL mais utilizados 
+    # Criar um novo Banco de Dados
+        CREATE DATABASE 'nome do banco';
+    # Criar uma tabela para armanezar dados ( nos () colocar os nomes das colunas e seus tipos )
+        CREATE TEABLE 'nome da tabela' ( id INTERGER PRIMARY KEY AUTOINCREMENT, nome VARCHAR(100),preco DECIMAL);
+    # Incluir dados na tabela
+        INSERT INTO 'nome da tabela' (nome, preco) VALUES ('curso de Python',250.00);
+    # Listar os dados
+        SELECT * FROM 'nome da tabela';
+    # Atualizar dados com ID informado
+        UPDATE 'nome da tabela' SET nome='CURSO DE PYTHON PARA INICIANTES' WHERE id = 1; (MUITO IMPORTANTE ESSE UPTDE COLOCAR O WHERE)
+    # Excluir dados da tabela
+        DELETE FROM 'nome da tabela' WHERE id = 1; (MUITO IMPORTANTE ESSE UPTDE COLOCAR O WHERE)
+     SQL NAO EXISTE CTRL + Z
+
+4. DB API
+    Utiliza para fazer a conexão com o banco de dados
+    Importante é saber qual banco de dados vai ser conectado para colocar o Drive correto quando Usar o DB API (mysql,mariadb,sqlite,sqlserver,oracle...)
+
+    1. Conectar
+        import sqlite3
+        con = sqlite3.connect('meu banco de dados')  
+
+        Importante ( caso queira criar o BDs dentro de uma pasta ou na mesma pasta do arquivo Python usa o comando,
+            from pathlib import path
+            ROOT_PATH = Path(__file__).parente
+            con = sqlite3.connect(ROOT_PATH / 'meu banco de dados')
+            )
+    2. Criando Tabela
+        cursor.execute("CREATE TABLE clientes (ID INTEGER PRIMARY KEY AUTOINCREMENT,nome VARCHAR(100),email VARCHAR(30))" )
+    
+    3. Inserindo dados na tabela
+    existe dois modos de fazer o INSET esse seria o modo mais correto para nao ter insert desnecessario
+        data = ("Gean","gean@gmail.com")
+        cursor.execute("INSERT INTO clientes (nome,email) VALUES (?,?);" ,data)
+        conexao.commit()
+
+
+        def Atualizar_registro(conexao,cursor,nome,email,id):
+            data = (nome,email,id)
+            cursor.execute("UPDATE clientes SET nome = ?, email = ? WHERE ID=? ;" ,data)
+            conexao.commit()
+
+        def Deletar_registro(conexao,cursor,id):
+            data = (id,)
+            cursor.execute("DELETE FROM clientes WHERE ID=? ;" ,data)
+            conexao.commit()
+
+        def Inserir_Lote(conexao,cursor,dados):
+            cursor.executemany("INSERT INTO clientes (nome,email) VALUES (?,?);" ,dados)
+            conexao.commit()
+
+        def Select_dados(cursor,coluna,id):
+            cursor.execute("SELECT * FROM clientes WHERE ?=?", (coluna,id))
+            return cursor.fetchone()

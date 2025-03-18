@@ -1,1 +1,5 @@
 venv/
+<<<<<<< HEAD
+=======
+*.db
+>>>>>>> d96edbc (Aula 17/03 Banco de Dados Python)
